@@ -2,8 +2,13 @@
 name = "shut"
 version = "0.1.0"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+authors = ["nuky <svenvowe@gmail.com>"]
+description = "A small CLI tool to kill a process blocking a port."
+keywords = ["shut", "system", "process", "port", "pid"]
+categories = ["os", "tools", "cli"]
+repository = "https://github.com/nuclearglow/shut"
+readme = "README.md"
+license = "MIT"
 
 [dependencies]
 log = "0.4"

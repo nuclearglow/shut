@@ -1,1 +1,5 @@
+# rust
 /target
+# direnv, dotenv
+.envrc
+.env

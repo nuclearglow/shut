@@ -9,7 +9,7 @@ use std::{env, process};
 mod shut;
 
 const USAGE: &str = "
-shut - Kill process listening on port 6969
+Kill process(es) listening on <port>
 USAGE:
     shut <port>
 ";
@@ -23,7 +23,7 @@ async fn main() {
 
     match env::args().nth(1) {
         None => {
-            log::error!("{}", USAGE);
+            log::info!("{}", USAGE);
             process::exit(exitcode::USAGE);
         }
         Some(arg) => {

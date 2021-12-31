@@ -1,6 +1,6 @@
 # shut
 
-A small CLI tool to kill a process blocking a certain port.
+A small CLI tool to kill a process blocking a port.
 
 ## Usage
 

@@ -3,15 +3,13 @@
 //!  Kill the associated process(es) blocking port 6969:
 //! `shut 6969`
 
-extern crate exitcode;
-
 use log;
 use std::{env, process};
 
 mod shut;
 
 const USAGE: &str = "
-shut - Shot a port by killing its process
+shut - Kill process listening on port 6969
 USAGE:
     shut <port>
 ";
@@ -21,7 +19,7 @@ async fn main() {
     if env::var_os("RUST_LOG").is_none() {
         env::set_var("RUST_LOG", "info");
     }
-    pretty_env_logger::init();
+    env_logger::builder().format_timestamp(None).init();
 
     match env::args().nth(1) {
         None => {

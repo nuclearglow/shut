@@ -1,6 +1,6 @@
 # shut
 
-A small CLI tool to kill a process blocking a port.
+A minimal CLI tool to kill a process listening on a port.
 
 ## Usage
 
@@ -12,7 +12,7 @@ shut 6969
 
 # Alternatives
 
-Linux:
+Linux / Mac OS X:
 ```shell
-kill -9 $(lsof -t -i:8080)
+kill -9 $(lsof -t -i:6969)
 ```

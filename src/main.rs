@@ -1,4 +1,4 @@
-//! A small CLI tool to kill a process blocking a port.
+//! A minimal CLI tool to kill a process listening on a port.
 //!
 //!  Kill the associated process(es) blocking port 6969:
 //! `shut 6969`

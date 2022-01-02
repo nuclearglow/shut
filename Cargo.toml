@@ -1,12 +1,11 @@
 [package]
 name = "shut"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 authors = ["nuky <svenvowe@gmail.com>"]
 description = "A minimal CLI tool to kill a process listening on a port."
 keywords = ["cli", "system", "process", "port", "pid"]
 categories = ["command-line-utilities"]
-homepage = "https://github.com/nuclearglow/shut"
 repository = "https://github.com/nuclearglow/shut"
 readme = "README.md"
 license = "MIT"
@@ -18,7 +17,6 @@ exclude = [
 [[bin]]
 name = "shut"
 path = "src/main.rs"
-doc = false
 
 [dependencies]
 log = "0.4"

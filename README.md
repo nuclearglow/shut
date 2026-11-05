@@ -42,7 +42,8 @@ cargo install shut
 
 ## Notes
 
-- Requires Rust 1.95 or newer to build.
+- Requires Rust 1.95 or newer to build. On macOS, the Xcode Command Line
+  Tools must be installed (`xcode-select --install`).
 - Processes owned by another user are visible as "port in use, owner not
   visible"; rerun with `sudo` to kill them.
 - `shut` never kills itself.

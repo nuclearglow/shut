@@ -1,6 +1,6 @@
 [package]
 name = "shut"
-version = "0.1.3"
+version = "0.2.0"
 edition = "2024"
 rust-version = "1.95"
 authors = ["nuky <svenvowe@gmail.com>"]
@@ -10,7 +10,7 @@ categories = ["command-line-utilities"]
 repository = "https://github.com/nuclearglow/shut"
 readme = "README.md"
 license = "MIT"
-include = ["/src/**", "/tests/**", "/Cargo.toml", "/README.md", "/LICENSE"]
+include = ["/src/**", "/tests/**", "/Cargo.toml", "/README.md", "/CHANGELOG.md", "/LICENSE"]
 
 [lib]
 name = "shut"

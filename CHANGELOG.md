@@ -4,6 +4,8 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project
 adheres to [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
 ## [0.2.0] - 2026-11-05
 
 ### Breaking
@@ -52,5 +54,6 @@ adheres to [Semantic Versioning](https://semver.org/).
 
 - Initial release.
 
+[Unreleased]: https://github.com/nuclearglow/shut/compare/v0.2.0...HEAD
 [0.2.0]: https://github.com/nuclearglow/shut/compare/4dde501...v0.2.0
 [0.1.2]: https://github.com/nuclearglow/shut/commits/4dde501

@@ -1,0 +1,14 @@
+# Install with: pre-commit install
+default_install_hook_types: [pre-push]
+
+repos:
+  - repo: local
+    hooks:
+      - id: make-ci
+        name: make ci
+        # Checks run on the working tree, so it must match what is pushed.
+        entry: make check-clean ci
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]

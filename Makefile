@@ -1,6 +1,6 @@
-# Local mirror of .github/workflows/ci.yml, plus release helpers.
+# CI checks and release helpers.
 #
-#   make ci                      run every CI check
+#   make ci                      run every check (also runs on git push)
 #   make version VERSION=x.y.z   bump, update CHANGELOG, run CI, commit and tag
 #   make publish                 push main + tag, then publish to crates.io
 

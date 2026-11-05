@@ -39,7 +39,8 @@ adheres to [Semantic Versioning](https://semver.org/).
 
 - `-h`/`--help` and `-V`/`--version`.
 - `shut` library crate (`scan_port`, `kill`) with integration tests.
-- CI on Linux, macOS and Windows, plus an MSRV check.
+- `make ci` (fmt, clippy, tests, MSRV, package check), run on `git push` via
+  `pre-commit`, and `make version` / `make publish` release targets.
 - `LICENSE` file.
 
 ## [0.1.2] - 2022-01-02

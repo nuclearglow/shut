@@ -9,7 +9,7 @@
 use std::collections::BTreeSet;
 use std::io;
 
-use netstat2::{get_sockets_info, AddressFamilyFlags, ProtocolFlags, ProtocolSocketInfo, TcpState};
+use netstat2::{AddressFamilyFlags, ProtocolFlags, ProtocolSocketInfo, TcpState, get_sockets_info};
 use sysinfo::{Pid, ProcessesToUpdate, Signal, System};
 
 /// Sockets bound to a port, and the processes owning them.
@@ -31,6 +31,7 @@ impl PortScan {
     /// `true` when a socket is bound but its owner is not visible to us.
     ///
     /// Reported as a permission problem rather than as "nothing listens here".
+    #[must_use]
     pub fn owner_is_hidden(&self) -> bool {
         self.sockets > 0 && self.pids.is_empty()
     }
@@ -56,6 +57,10 @@ pub enum KillError {
 }
 
 /// Look up every socket bound to `port`.
+///
+/// # Errors
+///
+/// Fails when the kernel socket table cannot be read.
 pub fn scan_port(port: u16) -> io::Result<PortScan> {
     let sockets = get_sockets_info(
         AddressFamilyFlags::IPV4 | AddressFamilyFlags::IPV6,
@@ -89,6 +94,10 @@ pub fn scan_port(port: u16) -> io::Result<PortScan> {
 /// The process is looked up first, so the returned description reflects what
 /// was signalled. A signal that is not delivered is classified by re-checking
 /// whether the process is still alive.
+///
+/// # Errors
+///
+/// Returns a [`KillError`] describing why the process was not signalled.
 pub fn kill(pid: u32) -> Result<Killed, KillError> {
     let mut system = System::new().map_err(|error| {
         KillError::Unsupported(format!("cannot read the process table: {error}"))
@@ -111,15 +120,14 @@ pub fn kill(pid: u32) -> Result<Killed, KillError> {
             .join(" "),
     };
 
-    match process.kill_with(Signal::Kill) {
-        Some(true) => Ok(killed),
-        _ => {
-            system.refresh_processes(ProcessesToUpdate::Some(&pids), true);
-            if system.process(pids[0]).is_some() {
-                Err(KillError::PermissionDenied)
-            } else {
-                Err(KillError::Gone)
-            }
-        }
+    if process.kill_with(Signal::Kill) == Some(true) {
+        return Ok(killed);
+    }
+
+    system.refresh_processes(ProcessesToUpdate::Some(&pids), true);
+    if system.process(pids[0]).is_some() {
+        Err(KillError::PermissionDenied)
+    } else {
+        Err(KillError::Gone)
     }
 }

@@ -125,9 +125,8 @@ fn run(port: u16) {
 fn parse_args(args: impl Iterator<Item = String>) -> Result<Action, String> {
     let args: Vec<String> = args.collect();
 
-    let first = match args.split_first() {
-        Some((first, _)) => first,
-        None => return Err("missing <port>".to_string()),
+    let Some((first, _)) = args.split_first() else {
+        return Err("missing <port>".to_string());
     };
 
     let action = match first.as_str() {
@@ -147,16 +146,16 @@ fn parse_port(raw: &str) -> Result<u16, String> {
     match raw.parse::<u16>() {
         Ok(0) => Err("port must be between 1 and 65535".to_string()),
         Ok(port) => Ok(port),
-        Err(_) => Err(format!("{:?} is not a valid port number", raw)),
+        Err(_) => Err(format!("{raw:?} is not a valid port number")),
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use super::{parse_args, parse_port, Action};
+    use super::{Action, parse_args, parse_port};
 
     fn args(list: &[&str]) -> Result<Action, String> {
-        parse_args(list.iter().map(|arg| arg.to_string()))
+        parse_args(list.iter().map(ToString::to_string))
     }
 
     #[test]

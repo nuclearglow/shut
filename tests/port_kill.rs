@@ -4,7 +4,7 @@ use std::sync::atomic::{AtomicU32, Ordering};
 use std::thread::sleep;
 use std::time::{Duration, Instant};
 
-use shut::{scan_port, KillError};
+use shut::{KillError, scan_port};
 
 static NEXT_ID: AtomicU32 = AtomicU32::new(0);
 
@@ -57,11 +57,11 @@ fn spawn_listener() -> (Child, u16) {
 fn read_announced_port(path: &std::path::Path) -> Option<u16> {
     let deadline = Instant::now() + Duration::from_secs(10);
     loop {
-        if let Ok(text) = std::fs::read_to_string(path) {
-            if let Ok(port) = text.trim().parse::<u16>() {
-                let _ = std::fs::remove_file(path);
-                return Some(port);
-            }
+        if let Ok(text) = std::fs::read_to_string(path)
+            && let Ok(port) = text.trim().parse::<u16>()
+        {
+            let _ = std::fs::remove_file(path);
+            return Some(port);
         }
         if Instant::now() >= deadline {
             return None;

@@ -6,6 +6,8 @@ adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-16
+
 ### Changed
 
 - Minimum supported Rust version is now 1.100 (was 1.95). There are no API or
@@ -60,6 +62,7 @@ adheres to [Semantic Versioning](https://semver.org/).
 
 - Initial release.
 
-[Unreleased]: https://github.com/nuclearglow/shut/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/nuclearglow/shut/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/nuclearglow/shut/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/nuclearglow/shut/compare/4dde501...v0.2.0
 [0.1.2]: https://github.com/nuclearglow/shut/commits/4dde501

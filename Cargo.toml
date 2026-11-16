@@ -2,7 +2,7 @@
 name = "shut"
 version = "0.2.0"
 edition = "2024"
-rust-version = "1.95"
+rust-version = "1.100"
 authors = ["nuky <svenvowe@gmail.com>"]
 description = "A minimal CLI tool to kill a process listening on a port."
 keywords = ["cli", "system", "process", "port", "pid"]

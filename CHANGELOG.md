@@ -6,6 +6,11 @@ adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- Minimum supported Rust version is now 1.100 (was 1.95). There are no API or
+  CLI changes; the crate builds unchanged on the newer toolchain.
+
 ## [0.2.0] - 2026-11-05
 
 ### Breaking

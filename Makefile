@@ -51,10 +51,23 @@ smoke:
 	@$(CARGO) run --quiet --locked -- 1; code=$$?; \
 	if [ "$$code" -ne 69 ]; then echo "smoke: expected exit 69, got $$code"; exit 1; fi
 
+# Finds the installed toolchain whose rustc is exactly $(MSRV), so the check
+# also accepts a default toolchain that tracks that version (stable 1.100
+# satisfying rust-version = "1.100"), not only a channel named after it.
 msrv:
-	@rustup toolchain list | grep -q '^$(MSRV)-' || { \
-		echo "msrv: toolchain $(MSRV) missing; run: rustup toolchain install $(MSRV)"; exit 1; }
-	$(CARGO) +$(MSRV) test --locked
+	@toolchain=; \
+	for candidate in $$(rustup toolchain list | awk '{ print $$1 }'); do \
+		version=$$(rustc +"$$candidate" --version 2>/dev/null | awk '{ print $$2 }'); \
+		if [ "$$version" = "$(MSRV)" ] || [ "$${version#"$(MSRV)".}" != "$$version" ]; then \
+			toolchain="$$candidate"; break; \
+		fi; \
+	done; \
+	if [ -z "$$toolchain" ]; then \
+		echo "msrv: no installed toolchain reports rustc $(MSRV); run: rustup toolchain install $(MSRV)"; \
+		exit 1; \
+	fi; \
+	echo "msrv: rustc $(MSRV) provided by $$toolchain"; \
+	$(CARGO) +"$$toolchain" test --locked
 
 package:
 	$(CARGO) publish --dry-run --locked $(PACKAGE_FLAGS)
